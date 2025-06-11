@@ -1,29 +1,28 @@
 # notesplz
-ai go port of notes-template
+vibe coded tool to generate browsable markdown vaults for offsec lab environments
 
-## setup
+it takes a yaml config and gives something like this
+
+![screenshot of the output open in obsidian](img/result.png)
+
+intended to be used as a timesaver for enumerating oscp-style boxes
+
+## install
 ```
-go mod init notes-template
-go get gopkg.in/yaml.v3
+make install
 ```
 
 ## usage
-```bash
-go run src/main.go config.yaml
 ```
-or
-```bash
-cd src && go build -o notesplz
-./notesplz config.yaml
+notesplz <config_file>
 ```
 
 ### config file
-
 yaml file should follow this structure:
 
 ```yaml
 Project:
-  "OSCP A"
+  "oscp-a"
 VPN IP:
   192.168.45.166
 Box Sets:
@@ -34,8 +33,8 @@ Box Sets:
       192.168.226.141
     cred page per host or set:
       "set"
-    make graph directory:
-      "yes"
+    make graph directory: 
+      "yes" # deprecated soon
   standalone:
     hosts:
       192.168.226.143
@@ -45,29 +44,4 @@ Box Sets:
       "host"
     make graph directory:
       "no"
-```
-
-### result
-
-the generated structure would be:
-```
-OSCP A/
-├── Project Name index.md
-├── ad set/
-│   ├── ad set index.md
-│   ├── random notes.md
-│   ├── creds.md
-│   ├── hosts/
-│   │   ├── ad set hosts.md
-│   │   ├── 192.168.226.141/
-│   │   │   ├── 192.168.226.141.md
-│   │   │   ├── enum.md
-│   │   │   └── nmap.md
-│   │   └── ...
-│   └── graph/ 
-│       ├── 192.168.226.141.md
-│       ├── 10.10.186.140.md
-│       ├── 10.10.186.142.md
-│       └── 192.168.45.166.md
-└── ...
 ```
