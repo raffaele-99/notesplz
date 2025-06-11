@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Build binaries
+      run: |
+        # Create build directory
+        mkdir -p dist
+        
+        # Build for multiple platforms using the Makefile structure
+        # Since the source is in ./src directory
+        SOURCE_FILES="./src/*.go"
+        
+        # Build for multiple platforms
+        GOOS=linux GOARCH=amd64 go build -o dist/notesplz-linux-amd64 ${SOURCE_FILES}
+        GOOS=linux GOARCH=arm64 go build -o dist/notesplz-linux-arm64 ${SOURCE_FILES}
+        GOOS=linux GOARCH=386 go build -o dist/notesplz-linux-386 ${SOURCE_FILES}
+        GOOS=darwin GOARCH=amd64 go build -o dist/notesplz-darwin-amd64 ${SOURCE_FILES}
+        GOOS=darwin GOARCH=arm64 go build -o dist/notesplz-darwin-arm64 ${SOURCE_FILES}
+        GOOS=windows GOARCH=amd64 go build -o dist/notesplz-windows-amd64.exe ${SOURCE_FILES}
+        GOOS=windows GOARCH=386 go build -o dist/notesplz-windows-386.exe ${SOURCE_FILES}
+        GOOS=windows GOARCH=arm64 go build -o dist/notesplz-windows-arm64.exe ${SOURCE_FILES}
+        GOOS=freebsd GOARCH=amd64 go build -o dist/notesplz-freebsd-amd64 ${SOURCE_FILES}
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: dist/notesplz-*
+        body: |
+          ## notesplz ${{ github.ref_name }}
+          
+          ### changes
+          - first release

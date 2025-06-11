@@ -1,0 +1,68 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# Dependency directories
+vendor/
+
+# Build directories (from Makefile)
+bin/
+dist/
+releases/
+build/
+
+# Binary name
+notesplz
+notesplz-*
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Debug files
+debug
+__debug_bin*
+
+# Archives (from build process)
+*.tar.gz
+*.zip
+
+# Checksums file
+checksums.txt
+SHA256SUMS
+
+# Nmap output files (for testing)
+*.nmap
+
+# Generated markdown files (for testing)
+*.md
+!README.md
