@@ -1,11 +1,7 @@
 # notesplz
-vibe coded tool to generate browsable markdown vaults for offsec lab environments
-
-it takes a yaml config and gives something like this
-
 ![screenshot of the output open in obsidian](img/result.png)
 
-intended to be used as a timesaver for enumerating oscp-style boxes
+makes browsable notes like that from a yaml config
 
 ## install
 ```
